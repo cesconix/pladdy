@@ -1,4 +1,4 @@
 pladdy
 ======
 
-Pladdy API
+RESTful API - api.pladdy.com
