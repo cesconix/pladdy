@@ -32,6 +32,6 @@ require("#{PATHS.CONFIG}/#{file}") app, express for file in [
 ]
 
 # Routes
-require("#{PATHS.ROUTE}/#{file}") app for file in (readdirSync "#{PATHS.ROUTE}").push 'asd' when (extname file) is '.js'
+require("#{PATHS.ROUTE}/#{file}") app for file in (readdirSync "#{PATHS.ROUTE}").reverse() when (extname file) is '.js'
 
 server.listen app.get 'system port'
