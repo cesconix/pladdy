@@ -5,7 +5,7 @@ module.exports.dispatch = (params) ->
 	(req, res) ->
 
 		# Check API Version
-		ver = req.params.ver or ''
+		ver = (Number req.params.ver) or ''
 		if ver isnt ''
 			ver = "v#{req.params.ver}/"
 			res.send 404 if not require('fs').existsSync "#{PATHS.CONTROLLER}/#{ver}"
