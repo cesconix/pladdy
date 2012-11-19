@@ -7,7 +7,7 @@ errorTypes =
 	other          : 405
 
 response = (code, data, error, layout = 'default') ->
-	(require "#{PATHS.VIEW}/responses/#{layout}") code, data, error
+	(require "#{PATHS.VIEW}/layouts/responses/#{layout}") code, data, error
 
 errorTypeExec = (type, code) ->
 	(details, message, layout = 'default') ->

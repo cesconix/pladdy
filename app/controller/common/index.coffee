@@ -4,4 +4,4 @@ module.exports.page_not_found = (req, res) ->
 	res.send 404
 
 module.exports.index = (req, res) ->
-	res.send 'Welcome to Pladdy'
+	res.render 'pages/home'
