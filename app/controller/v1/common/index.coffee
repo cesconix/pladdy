@@ -1,7 +1,4 @@
-response = require "#{PATHS.LIB}/response"
+response = require "#{paths.LIB}/response"
 
 module.exports.endpoint_error = (req, res) ->
-	res.send(response.endpoint_error('Endpoint not found'))
-
-module.exports.index = (req, res) ->
-	res.send 'Welcome to Pladdy API v1'
+	res.send response.endpoint_error('Endpoint not found')

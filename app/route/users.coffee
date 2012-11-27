@@ -1,5 +1,5 @@
-{dispatch} = require "#{PATHS.LIB}/routing"
+{dispatch} = require "#{paths.LIB}/routing"
 
-module.exports = (app) ->
+module.exports = () ->
 
-	app.post '/v:ver/users/signup', dispatch controller : 'users', action : 'signup', auth : no
+	app.get '/v:ver/users/signup', dispatch controller : 'users', action : 'signup', auth : no
