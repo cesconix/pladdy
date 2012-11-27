@@ -1,7 +1,7 @@
 {readdirSync}      = require 'fs'
 {extname, resolve} = require 'path'
 
-##
+#
 # PATHS
 #
 
@@ -19,8 +19,7 @@ GLOBAL.paths =
 	WEBROOT    : "#{APP_DIR}/webroot"
 	LIB        : "#{LIB_DIR}"
 
-
-##
+#
 # MODULES
 #
 
@@ -29,8 +28,7 @@ express  = require 'express'
 mongoose = require 'mongoose'
 socketio = require 'socket.io'
 
-
-##
+#
 # INIT
 #
 
@@ -40,8 +38,7 @@ io      = socketio.listen server
 
 GLOBAL.app = app
 
-
-##
+#
 # BOOTSTRAP
 #
 
@@ -56,8 +53,7 @@ require("#{paths.CONFIG}/#{file}") express for file in [
 # Routes
 require("#{paths.ROUTE}/#{file}")() for file in readdirSync("#{paths.ROUTE}").reverse() when extname(file) is '.js'
 
-
-##
+#
 # START SERVER
 #
 
