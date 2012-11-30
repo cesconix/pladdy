@@ -19,8 +19,3 @@ Dispatcher = (params) ->
 		next new Error('Controller not found.')
 
 module.exports = Dispatcher
-
-# # Check Auth
-# if params.auth is yes
-# 	access_token = req.query.access_token or '';
-# 	res.send param_error 'Missing access_token param' if access_token is ''
