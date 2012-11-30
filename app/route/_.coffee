@@ -1,8 +1,4 @@
-{dispatch} = require "#{paths.LIB}/routing"
-
-module.exports = () ->
-
-	app.all '/v:ver/*', dispatch controller : 'common', action : 'endpoint_error', auth : no
-	app.all '/v:ver'  , dispatch controller : 'common', action : 'page_not_found', auth : no
-	app.all '/'       , dispatch controller : 'common', action : 'home'          , auth : no
-	app.all '*'       , dispatch controller : 'common', action : 'page_not_found', auth : no
+app.all '/v:ver/*', Core.Dispatcher { controller : 'common', action : 'endpoint_error' }
+app.all '/v:ver'  , Core.Dispatcher { controller : 'common', action : 'not_found'      }
+app.all '/'       , Core.Dispatcher { controller : 'common', action : 'home'           }
+app.all '*'       , Core.Dispatcher { controller : 'common', action : 'not_found'      }

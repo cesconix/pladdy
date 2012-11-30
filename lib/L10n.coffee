@@ -15,6 +15,11 @@ class L10n
 		# Locale
 		@locale = @_L10nCatalog[ @_defaultLanguage ]
 
+	init : ->
+		(req, res, next) =>
+			@setLocale req.acceptedLanguages[0]
+			next()
+
 	setLocale : (lang) =>
 		@locale = if lang then @_L10nCatalog[ lang.toLowerCase() ] else @_L10nCatalog[ @_defaultLanguage ]
 

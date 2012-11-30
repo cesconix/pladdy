@@ -7,4 +7,6 @@ module.exports = (req, res) ->
 	cesconix.save (err) ->
 		if err
 			res.send err
-		res.send cesconix
+		#Core.Logger.info "Utente creato!"
+		console.log Core.L10n.__('Welcome', ['Francesco'])
+		res.send Core.Response.created(cesconix)

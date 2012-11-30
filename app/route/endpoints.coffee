@@ -1,5 +1,1 @@
-{dispatch} = require "#{paths.LIB}/routing"
-
-module.exports = () ->
-
-	app.all '/endpoints', dispatch controller : 'common', action : 'endpoints', auth : no
+app.all '/endpoints', Core.Dispatcher { controller : 'common', action : 'endpoints' }

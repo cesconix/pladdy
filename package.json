@@ -1,16 +1,22 @@
 {
   "name": "pladdy",
   "subdomain": "api.pladdy",
+  "domains": [
+    "api.pladdy.com"
+  ],
   "scripts": {
-    "start": "./app.js"
+    "start": "coffee app/index.coffee"
   },
-  "version": "0.0.0-1",
+  "version": "0.0.1-9",
   "engines": {
     "node": "0.8.x"
   },
   "dependencies": {
     "express": "*",
+    "jade": "*",
     "mongoose": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "winston": "*",
+    "sprintf": "*"
   }
 }
