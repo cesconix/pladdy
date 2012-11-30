@@ -16,7 +16,7 @@ Dispatcher = (params) ->
 			if controller[params.action]?
 				return controller[params.action] req, res
 
-		next(new Error('Controller not found.'))
+		next new Error('Controller not found.')
 
 module.exports = Dispatcher
 
