@@ -29,7 +29,7 @@ mongoose = require 'mongoose'
 socketio = require 'socket.io'
 
 #----------------
-#  CORE
+# CORE
 #----------------
 
 GLOBAL.Core =

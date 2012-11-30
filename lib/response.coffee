@@ -21,16 +21,16 @@ class Response
 			server_error   : 500
 
 		successExec = (code) ->
-			(data = {}, layout = 'default') ->
-				@response code, data, null, layout
+			(res, data = {}, layout = 'default') ->
+				res.send code, @response(code, data, null, layout)
 
 		errorExec = (type, code) ->
-			(details, message, layout = 'default') ->
+			(res, details, message, layout = 'default') ->
 				error         = {}
 				error.type    = type
 				error.details = details
-				error.message = message unless message isnt ''
-				@response code, {}, error, layout
+				error.message = message if message?
+				res.send code, @response(code, {}, error, layout)
 
 		for type, code of successTypes
 			@[type] = successExec code
