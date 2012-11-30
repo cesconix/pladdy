@@ -1,5 +1,3 @@
-{existsSync} = require 'fs'
-
 Dispatcher = (params) ->
 
 	(req, res, next) ->
@@ -8,21 +6,17 @@ Dispatcher = (params) ->
 		ver = (Number req.params.ver) or ''
 		if ver isnt ''
 			ver = "v#{req.params.ver}/"
-			if not existsSync "#{paths.CONTROLLER}/#{ver}"
-				next
 
 		# Dispatch to Controller
 		controller = "#{paths.CONTROLLER}/#{ver}#{params.controller}"
 
-		if not existsSync controller
-			next
+		if require('fs').existsSync controller
+			controller = require controller
 
-		controller = require controller
+			if controller[params.action]?
+				return controller[params.action] req, res
 
-		if params.action not in controller
-			next
-
-		controller[ params.action ] req, res
+		next(new Error('Controller not found.'))
 
 module.exports = Dispatcher
 
