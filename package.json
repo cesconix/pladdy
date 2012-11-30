@@ -1,5 +1,6 @@
 {
   "name": "pladdy",
+  "author": "Francesco Pasqua <cesconix87@gmail.com>",
   "subdomain": "api.pladdy",
   "domains": [
     "api.pladdy.com"
