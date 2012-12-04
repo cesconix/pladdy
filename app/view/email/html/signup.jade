@@ -1,0 +1,11 @@
+extends ../../layouts/email/html/confirm_email
+
+block content
+	|Salve #{name},<br>
+	|<br>
+	|Ti sei appena iscritto su #{app.get('app title')}. Clicca il link per confermare che questo è il tuo indirizzo e-mail.<br>
+	|<br>
+	a(href="#")
+	|<br>
+	|<br>
+	|Una volta confermato, avrai pieno accesso a #{app.get('app title')} e tutte le notifiche future saranno mandate a questo indirizzo email.<br>

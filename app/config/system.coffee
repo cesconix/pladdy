@@ -6,5 +6,14 @@ module.exports = () ->
 	app.set 'view engine'  , 'jade'
 	app.set 'views'        , "#{paths.VIEW}"
 
+	app.set 'email',
+		transport:
+			type    : 'SMTP'
+			options :
+				service : 'Gmail'
+				auth    :
+					user : "pladdy.com@gmail.com",
+					pass : "[@cesconix#]"
+
 	app.enable 'strict routing'
 	app.enable 'case sensitive routing'
