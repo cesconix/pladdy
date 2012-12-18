@@ -38,8 +38,9 @@ GLOBAL.Core =
 	Response   : require "#{paths.LIB}/response"
 	Dispatcher : require "#{paths.LIB}/dispatcher"
 
-GLOBAL.__     = Core.L10n.__
-GLOBAL.Logger = Core.Logger
+GLOBAL.__       = Core.L10n.__
+GLOBAL.Logger   = Core.Logger
+GLOBAL.Response = Core.Response
 
 #----------------
 # INIT
@@ -85,7 +86,15 @@ db = mongoose.createConnection(
 	,  	pass : db['pass']
 )
 
+# Database connected callback
+db.on 'connected', ->
+	Logger.info "Connected to database '#{app.get('databases')[app.get('env')].name}' (#{app.get('env')})"
+	Logger.info "App started!"
+	Logger.info "------------"
+
 GLOBAL.db = db
 
 # Go!
 server.listen( app.get 'system port' )
+Logger.info "------------"
+Logger.info 'Waiting for db connection...'
