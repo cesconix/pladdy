@@ -38,6 +38,8 @@ schema = new Schema({
 		type    : Boolean
 		default : off
 
+	email_detached: [ String ]
+
 	created:
 		type    : Date
 		default : new Date()
@@ -48,22 +50,20 @@ schema = new Schema({
 	profile:
 
 		name:
-			type : String
+			type    : String
+			default : ''
 
 		surname:
-			type : String
+			type    : String
+			default : ''
 
 },{
 	versionKey : no
 })
 
 schema.pre 'save', (next) ->
-	@hash     = crypto
-					.createHmac('sha1', app.get 'security salt')
-					.update( @username + Math.round(new Date().getTime()).toString() )
-					.digest('hex')
-
-	@password =	crypto
+	if @password isnt ''
+		@password =	crypto
 					.createHmac('sha1', app.get 'security salt')
 					.update(@password)
 					.digest('hex')

@@ -1,14 +1,14 @@
 {
-  "name": "pladdy",
+  "name": "pladdy_server",
   "author": "Francesco Pasqua <cesconix87@gmail.com>",
-  "subdomain": "api.pladdy",
+  "subdomain": "pladdy_server",
   "domains": [
     "api.pladdy.com"
   ],
   "scripts": {
     "start": "coffee app/index.coffee"
   },
-  "version": "0.0.0-2",
+  "version": "0.0.0-4",
   "engines": {
     "node": "0.8.x"
   },
@@ -20,6 +20,7 @@
     "winston": "0.6.x",
     "sprintf": "0.1.x",
     "nodemailer": "0.3.x",
-    "mongoose-validator": "0.2.x"
+    "mongoose-validator": "0.2.x",
+    "validator": "0.4.x"
   }
 }

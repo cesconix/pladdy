@@ -1,21 +1,27 @@
 {Api}  = require "#{paths.CONTROLLER}/common/component"
 crypto = require 'crypto'
 
+module.exports =
+
 class Login extends Api
+
+	constructor: ->
+		super
+		@params = params
 
 	#
 	# API Params
 	#
-	params:
+	params =
 
-		username:
+		username
 			required : yes
 
 		password:
 			required : yes
 
 	#
-	# Exec
+	# Execute
 	#
 	exec: (req, res) ->
 		return if super is false
@@ -44,10 +50,10 @@ class Login extends Api
 
 					# session found
 					if session_result?
-						Response.ok res, { access_token : session_result.access_token, last_login : session_result.last_login }
-
 						# update last login
 						SessionModel.update { access_token : session_result.access_token }, { last_login : new Date }
+
+						return Response.ok res, { access_token : session_result.access_token, last_login : session_result.last_login }
 
 					# session not found
 					else
@@ -68,5 +74,3 @@ class Login extends Api
 			#user not found
 			else
 				return Response.invalid_auth res, 'user not found or invalid password', __('wrong username or password')
-
-module.exports = new Login

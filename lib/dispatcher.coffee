@@ -1,3 +1,10 @@
+#
+#   Author : Francesco Pasqua
+#   Email  : cesconix87@gmail.com
+#
+#   Copyright (c) cescolab 2013. All Rights Reserved.
+#
+
 Dispatcher = (params) ->
 
 	(req, res, next) ->
@@ -16,6 +23,6 @@ Dispatcher = (params) ->
 			if controller[params.action]?
 				return controller[params.action] req, res
 
-		next new Error('Controller not found.')
+		next new Error('Controller or action not found.')
 
 module.exports = Dispatcher

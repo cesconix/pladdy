@@ -1,0 +1,25 @@
+{
+	"pladdy.com" : [
+		{
+			"endpoint" : "/account/not_my_account/:user_id/:hash",
+			"method"   : "GET",
+			"note"     : "
+				1) Verifica se esiste la combinazione e (email !== '' && email_confirmed === 0)
+				2) Svuota campo email e aggiungi nell'array detached_emails
+				3) Ricrea hash dell'utente
+				4) Aggiungi notifications a :user_id
+			"
+		},
+		{
+			"endpoint" : "/account/confirm_email/:user_id/:hash",
+			"method"   : "GET",
+			"note"     : "
+				1) Verifica se esiste
+				2) Attiva email_confirmed
+			"
+		},
+	],
+	"api.pladdy.com" : [
+
+	]
+}

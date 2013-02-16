@@ -3,9 +3,9 @@ extends ../../layouts/email/html/confirm_email
 block content
 	|Salve #{name},<br>
 	|<br>
-	|Ti sei appena iscritto su #{settings['app title']}. Clicca il link per confermare che questo è il tuo indirizzo e-mail.<br>
+	|Ti sei appena iscritto su #{settings['app title']}. Clicca il link per confermare che questo è il tuo indirizzo email.<br>
 	|<br>
-	a(href="#{link}") #{link}
+	a(href="#{link}",style="padding: 6px 7px 6px 7px; background-color: #2f96b4; font-weight: bold; border-radius: 3px; color: #ffffff; text-decoration: none") Conferma indirizzo email
 	|<br>
 	|<br>
-	|Una volta confermato, avrai pieno accesso a #{settings['app title']} e tutte le notifiche future saranno mandate a questo indirizzo email.<br>
+	|Una volta confermato, avrai pieno accesso a #{settings['app title']} e tutte le notifiche future saranno inviate a questo indirizzo email.<br>

@@ -1,3 +1,53 @@
+_js = require "underscore"
+
+
+#----------------
+# API
+#----------------
+#
+class Api
+
+	constructor: ->
+		@data   = {}
+		@params = {}
+
+	check_params: ->
+		return false if not @params?
+
+		for type of @params
+			for param, options of @params[type]
+
+				@data[param] = @req[type][param]
+
+				# check required
+				if options.required? and options.required is yes
+					if not @data[param]?
+						return Response.param_error @res, "missing '#{param}' (#{type}) parameter"
+
+				if @data[param]?
+					# check values
+					if options.values? and _js.isArray(options.values)
+						if @data[param] not in options.values
+							return Response.param_error @res, "'#{param}' param accept only '#{options.values.join '\', \''}'"
+				else
+					# default value
+					if options.default?
+						@data[param] = options.default
+
+		return false
+
+	default_params: ->
+		return;
+
+	exec: (req, res) ->
+		@req = req
+		@res = res
+		return false if @check_params() isnt false
+		@default_params()
+
+module.exports.Api = Api
+
+
 #----------------
 # EMAIL
 #----------------
@@ -30,27 +80,3 @@ class Email
 
 module.exports.Email = Email
 
-#----------------
-# API
-#----------------
-
-class Api
-
-	data   : {}
-
-	check_params: =>
-		return false if not @params?
-
-		for param, options of @params
-			if options.required and not @req.body[param]?
-				return Response.param_error @res, "missing '#{param}' parameter"
-			@data[param] = @req.body[param]
-
-		return false
-
-	exec: (req, res) =>
-		@req = req
-		@res = res
-		return false if @check_params() isnt false
-
-module.exports.Api = Api

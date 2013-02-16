@@ -1,12 +1,18 @@
 {Api, Email} = require "#{paths.CONTROLLER}/common/component"
 crypto       = require 'crypto'
 
+module.exports =
+
 class Signup extends Api
+
+	constructor: ->
+		super
+		@params = params
 
 	#
 	# API Params
 	#
-	params:
+	param =
 
 		username:
 			required : yes
@@ -18,7 +24,7 @@ class Signup extends Api
 			required : yes
 
 	#
-	# Exec
+	# Execute
 	#
 	exec: (req, res) ->
 		return if super is false
@@ -38,13 +44,17 @@ class Signup extends Api
 			user.username = @data.username
 			user.email    = @data.email
 			user.password = @data.password
+			user.hash     = crypto
+								.createHmac('sha1', app.get 'security salt')
+								.update( @data.username + Math.round(new Date().getTime()).toString() )
+								.digest('hex')
 
 			# save user
 			user.save (err, user_result) =>
 				if err?
 					return Response.validation_error err, res
 
-				session
+				# session
 				session = new SessionModel
 				session.user_id      = user_result._id
 				session.user_agent   = req.headers['user-agent']
@@ -69,7 +79,7 @@ class Signup extends Api
 					data =
 						title : options.subject
 						name  : user_result.username
-						link  : "http://pladdy.com/confirm/#{user_result.email}/#{user_result.hash}"
+						link  : app.get('server website') + "account/confirm/#{user_result.hash}"
 
 					email = new Email(options, data)
 
@@ -80,8 +90,4 @@ class Signup extends Api
 						_id             : user_result._id
 						username        : user_result.username
 						email           : user_result.email
-						password        : user_result.password
-						email_confirmed : user_result.email_confirmed
 						access_token    : session_result.access_token
-
-module.exports = new Signup

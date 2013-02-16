@@ -1,9 +1,17 @@
-module.exports = (code, data, error) ->
+module.exports = (code, data, pagination, notifications, error) ->
 
 	response =
 		meta :
 			code : code
-		data : data
+
+	if data isnt null
+		response.data = data
+
+	if pagination isnt null
+		response.pagination = pagination
+
+	if notifications isnt null
+		response.notifications = notifications
 
 	if error isnt null
 		response.meta.errorType    = error.type

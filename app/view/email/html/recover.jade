@@ -1,0 +1,11 @@
+extends ../../layouts/email/html/default
+
+block content
+	| #{settings['app title']} ha ricevuto una richiesta per resettare la password del tuo account (#{name}).<br>
+	|<br>
+	|Se vuoi resettare la password, clicca il link sottostante:<br>
+	|<br>
+	a(href="#{link}",style="padding: 6px 7px 6px 7px; background-color: #faa732; font-weight: bold; border-radius: 3px; color: #ffffff; text-decoration: none") Reimposta Password
+	|<br>
+	|<br>
+	|Se non vuoi resettare la tua password, per favore ignora questo messaggio. La tua password non sarà resettata. Per qualsiasi problema, contattaci.<br>

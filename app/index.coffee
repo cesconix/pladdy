@@ -57,15 +57,32 @@ GLOBAL.app = app
 #----------------
 
 # Config
-require("#{paths.CONFIG}/#{file}") express for file in [
+Logger.info("Config: #{file}.coffee") and require("#{paths.CONFIG}/#{file}") express for file in [
 	  'system'
 	, 'middleware'
 	, 'database'
+	, 'storage'
 	, 'app'
 ]
 
 # Routes
-require "#{paths.ROUTE}/#{file}" for file in readdirSync("#{paths.ROUTE}").reverse() when extname(file) is '.coffee'
+for file in readdirSync("#{paths.ROUTE}") when extname(file) is '.coffee' and file isnt '_.coffee'
+	Logger.info "Route: #{file}"
+	require "#{paths.ROUTE}/#{file}"
+
+Logger.info("Route: _.coffee") and require "#{paths.ROUTE}/_.coffee"
+
+#----------------
+# STORAGE
+#----------------
+# GLOBAL.Storage = require('knox').createClient app.get 'storage'
+
+# require('fs').readFile '/Users/cesconix/repos/pladdy/app/webroot/img/pladdy-logo-email.png', (err, buf) ->
+# 	req = Storage.put('/test/lolsd2.png')
+# 	req.on 'response', (res) ->
+# 		if 200 == res.statusCode
+# 			console.log 'saved to %s', req.url
+# 	req.end buf
 
 #----------------
 # START SERVER
@@ -88,13 +105,11 @@ db = mongoose.createConnection(
 
 # Database connected callback
 db.on 'connected', ->
-	Logger.info "Connected to database '#{app.get('databases')[app.get('env')].name}' (#{app.get('env')})"
-	Logger.info "App started!"
-	Logger.info "------------"
+	Logger.info "*** Connection to database completed."
+	Logger.info "Pladdy API RESTful Server started."
 
 GLOBAL.db = db
 
 # Go!
 server.listen( app.get 'system port' )
-Logger.info "------------"
-Logger.info 'Waiting for db connection...'
+Logger.info "*** Connecting to DB [#{app.get('databases')[app.get('env')].name}] (#{app.get('env')})..."
