@@ -21,7 +21,7 @@ class Login extends Api
 	#
 	params =
 		body:
-			username  { required : yes }
+			username : { required : yes }
 			password : { required : yes }
 
 	#
