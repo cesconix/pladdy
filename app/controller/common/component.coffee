@@ -1,5 +1,11 @@
-_js = require "underscore"
+#
+#   Author : Francesco Pasqua
+#   Email  : cesconix87@gmail.com
+#
+#   Copyright (c) cescolab 2013. All Rights Reserved.
+#
 
+_js = require "underscore"
 
 #----------------
 # API
@@ -37,7 +43,18 @@ class Api
 		return false
 
 	default_params: ->
-		return;
+		# Save access_token
+		if @req.query.access_token?
+			@data['access_token'] = @req.query.access_token
+
+		if @req.body.access_token?
+			@data['access_token'] = @req.body.access_token
+
+		# Add req.params
+		for param of @req.params
+			@data[param] = @req.params[param]
+
+		delete @data.ver
 
 	exec: (req, res) ->
 		@req = req
