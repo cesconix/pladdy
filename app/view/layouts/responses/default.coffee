@@ -4,16 +4,16 @@ module.exports = (code, data, pagination, notifications, error) ->
 		meta :
 			code : code
 
-	if data isnt null
+	if data?
 		response.data = data
 
-	if pagination isnt null
+	if pagination?
 		response.pagination = pagination
 
-	if notifications isnt null
+	if notifications?
 		response.notifications = notifications
 
-	if error isnt null
+	if error?
 		response.meta.errorType    = error.type
 		response.meta.errorDetail  = error.details
 		response.meta.errorMessage = error.message if error.message isnt ''

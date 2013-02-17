@@ -33,7 +33,7 @@ class Response
 
 		successExec = (code) ->
 			(res, data, pagination, notifications, layout = 'default') ->
-				res.send code, @response(code, data, pagination, notifications, null, layout)
+				res.send code, @response code, data, pagination, notifications, null, layout
 
 		errorExec = (type, code) ->
 			(res, details, message, layout = 'default') ->
@@ -41,7 +41,7 @@ class Response
 				error.type    = type
 				error.details = details
 				error.message = message if message?
-				res.send code, @response(code, null, null, null, error, layout)
+				res.send code, @response code, null, null, null, error, layout
 
 		for type, code of successTypes
 			@[type] = successExec code
