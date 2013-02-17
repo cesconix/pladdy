@@ -1,3 +1,10 @@
+#
+#   Author : Francesco Pasqua
+#   Email  : cesconix87@gmail.com
+#
+#   Copyright (c) cescolab 2013. All Rights Reserved.
+#
+
 {Api, Email} = require "#{paths.CONTROLLER}/common/component"
 {check}      = require 'validator'
 crypto       = require 'crypto'
@@ -14,9 +21,8 @@ class Recover extends Api
 	# API Params
 	#
 	params =
-
-		username_or_email:
-			required : yes
+		body:
+			username_or_email : { required : yes }
 
 	#
 	# Execute

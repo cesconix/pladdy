@@ -1,3 +1,10 @@
+#
+#   Author : Francesco Pasqua
+#   Email  : cesconix87@gmail.com
+#
+#   Copyright (c) cescolab 2013. All Rights Reserved.
+#
+
 {Api}  = require "#{paths.CONTROLLER}/common/component"
 crypto = require 'crypto'
 
@@ -13,12 +20,9 @@ class Login extends Api
 	# API Params
 	#
 	params =
-
-		username
-			required : yes
-
-		password:
-			required : yes
+		body:
+			username  { required : yes }
+			password : { required : yes }
 
 	#
 	# Execute

@@ -1,3 +1,10 @@
+#
+#   Author : Francesco Pasqua
+#   Email  : cesconix87@gmail.com
+#
+#   Copyright (c) cescolab 2013. All Rights Reserved.
+#
+
 {Api, Email} = require "#{paths.CONTROLLER}/common/component"
 crypto       = require 'crypto'
 
@@ -12,16 +19,11 @@ class Signup extends Api
 	#
 	# API Params
 	#
-	param =
-
-		username:
-			required : yes
-
-		email:
-			required : yes
-
-		password:
-			required : yes
+	params =
+		body:
+			username : { required : yes }
+			email    : { required : yes }
+			password : { required : yes }
 
 	#
 	# Execute

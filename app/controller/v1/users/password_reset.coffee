@@ -1,3 +1,10 @@
+#
+#   Author : Francesco Pasqua
+#   Email  : cesconix87@gmail.com
+#
+#   Copyright (c) cescolab 2013. All Rights Reserved.
+#
+
 {Api, Email} = require "#{paths.CONTROLLER}/common/component"
 crypto       = require 'crypto'
 
@@ -13,9 +20,8 @@ class PasswordReset extends Api
 	# API Params
 	#
 	params =
-
-		new_password:
-			required : yes
+		body:
+			new_password : { required : yes }
 
 	#
 	# Execute
@@ -27,7 +33,7 @@ class PasswordReset extends Api
 		UserModel    = db.model 'User'
 		SessionModel = db.model 'Session'
 
-		UserModel.findOne hash:req.params.hash_user, (err, user_result) =>
+		UserModel.findOne { hash : @data.hash_user }, (err, user_result) =>
 
 			# user not found
 			if not user_result?
@@ -41,7 +47,7 @@ class PasswordReset extends Api
 							.digest('hex')
 
 			# sorry, link expired
-			if hash_expiry isnt req.params.hash_expiry
+			if hash_expiry isnt @data.hash_expiry
 				return Response.endpoint_unavailable res, 'hash expired (querystring) or not valid', __('Sorry! Link expired or not valid, try to send another link for password reset and be sure to reply faster!')
 
 			# change password

@@ -1,3 +1,10 @@
+#
+#   Author : Francesco Pasqua
+#   Email  : cesconix87@gmail.com
+#
+#   Copyright (c) cescolab 2013. All Rights Reserved.
+#
+
 {Schema}   = require 'mongoose'
 {validate} = require 'mongoose-validator'
 crypto     = require 'crypto'
