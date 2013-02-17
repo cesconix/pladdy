@@ -1,7 +1,14 @@
+#
+#   Author : Francesco Pasqua
+#   Email  : cesconix87@gmail.com
+#
+#   Copyright (c) cescolab 2013. All Rights Reserved.
+#
+
 module.exports.auth = (req, res, next) ->
 
 	# Check Auth
-	access_token = req.query.access_token or '';
+	access_token = req.query.access_token or req.body.access_token '';
 
 	if access_token is ''
 		Response.param_error res, "missing 'access_token' parameter"
@@ -30,6 +37,13 @@ module.exports.secure = (req, res, next) ->
 module.exports.uploader = (req, res, next) ->
 	console.log req.files
 	next()
+
+module.exports.errorHandler = (err, req, res, next) ->
+	if req.path.indexOf '/v1' is 1
+		Logger.error err.stack
+		Response.server_error res, 'internal server error'
+	else
+		res.render 'pages/404', title : '404 Not Found'
 
 module.exports.basicAuth = require('express').basicAuth (user, pass) ->
 	params = app.get 'basicAuth'
