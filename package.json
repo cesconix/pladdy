@@ -8,19 +8,20 @@
   "scripts": {
     "start": "coffee app/index.coffee"
   },
-  "version": "0.0.0-9",
+  "version": "0.0.0-15",
   "engines": {
     "node": "0.8.x"
   },
   "dependencies": {
-    "express": "3.0.x",
-    "jade": "0.27.x",
-    "mongoose": "3.4.x",
+    "express": "3.1.x",
+    "jade": "0.28.x",
+    "mongoose": "3.5.x",
     "socket.io": "0.9.x",
     "winston": "0.6.x",
     "sprintf": "0.1.x",
     "nodemailer": "0.3.x",
     "mongoose-validator": "0.2.x",
-    "validator": "0.4.x"
+    "validator": "0.4.x",
+    "underscore": "1.4.x"
   }
 }

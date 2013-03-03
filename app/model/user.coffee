@@ -49,7 +49,7 @@ schema = new Schema({
 
 	created:
 		type    : Date
-		default : new Date()
+		default : Date.now
 
 	modified:
 		type : Date
@@ -63,6 +63,25 @@ schema = new Schema({
 		surname:
 			type    : String
 			default : ''
+
+	ranking:
+		type    : Number
+		default : 0
+
+	checkins: [{
+		type    : Schema.Types.ObjectId
+		ref     : 'Checkin'
+	}]
+
+	comments: [{
+		type    : Schema.Types.ObjectId
+		ref     : 'Comment'
+	}]
+
+	tips: [{
+		type    : Schema.Types.ObjectId
+		ref     : 'Tip'
+	}]
 
 },{
 	versionKey : no

@@ -18,11 +18,11 @@ schema = new Schema({
 
 	login_time:
 		type    : Date
-		default : new Date()
+		default : Date.now
 
 	last_login:
 		type    : Date
-		default : new Date()
+		default : Date.now
 
 	logout_time:
 		type    : Date

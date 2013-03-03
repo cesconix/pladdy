@@ -8,7 +8,7 @@
 module.exports.auth = (req, res, next) ->
 
 	# Check Auth
-	access_token = req.query.access_token or req.body.access_token '';
+	access_token = req.query.access_token or req.body.access_token or '';
 
 	if access_token is ''
 		Response.param_error res, "missing 'access_token' parameter"
