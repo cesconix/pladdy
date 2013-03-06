@@ -26,18 +26,18 @@ schema = new Schema({
 		default  : 1
 
 	likes: [{
-		type    : Schema.Types.ObjectId
-		ref     : 'User'
+		type     : Schema.Types.ObjectId
+		ref      : 'User'
 	}]
 
 	tips: [{
-		type    : Schema.Types.ObjectId
-		ref     : 'Tip'
+		type     : Schema.Types.ObjectId
+		ref      : 'Tip'
 	}]
 
 	checkins: [{
-		type    : Schema.Types.ObjectId
-		ref     : 'Checkin'
+		type     : Schema.Types.ObjectId
+		ref      : 'Checkin'
 	}]
 
 },{

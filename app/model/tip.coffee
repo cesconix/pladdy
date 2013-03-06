@@ -16,7 +16,7 @@ schema = new Schema({
 		type     : String
 		required : yes
 		validate : [
-			validate message : __('max 200 characters'), 'len', 1, 200
+			validate message : __('min 20, max 200 characters'), 'len', 20, 200
 		]
 
 	likes: [{
@@ -27,6 +27,9 @@ schema = new Schema({
 	created:
 		type     : Date
 		default  : Date.now
+
+	modified:
+		type     : Date
 
 },{
 	versionKey : no

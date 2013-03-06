@@ -8,7 +8,7 @@
   "scripts": {
     "start": "coffee app/index.coffee"
   },
-  "version": "0.0.0-15",
+  "version": "0.0.0-21",
   "engines": {
     "node": "0.8.x"
   },
@@ -22,6 +22,7 @@
     "nodemailer": "0.3.x",
     "mongoose-validator": "0.2.x",
     "validator": "0.4.x",
-    "underscore": "1.4.x"
+    "underscore": "1.4.x",
+    "async": "0.2.x"
   }
 }

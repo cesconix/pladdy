@@ -10,3 +10,6 @@ module.exports.only_post = (req, res) ->
 
 module.exports.only_get = (req, res) ->
 	Response.other res, 'this endpoint only supports GET'
+
+module.exports.verb_not_supported = (req, res) ->
+	Response.other res, 'this endpoint not support this http verb'

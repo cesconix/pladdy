@@ -5,7 +5,9 @@
 #   Copyright (c) cescolab 2013. All Rights Reserved.
 #
 
-{Api} = require "#{paths.CONTROLLER}/common/component"
+{Api}           = require "#{paths.CONTROLLER}/common/component"
+{compactObject} = require "#{paths.CONTROLLER}/common/helpers"
+
 _js   = require 'underscore'
 
 module.exports =
@@ -79,43 +81,31 @@ class PlaceCreate extends Api
 
 			# add new place
 			if places.length is 1
-				p          = new PlaceModel
-				p.type     = @data.type
-				p.loc      = [ places[0].loc[0], places[0].loc[1] ]
-				p.ranking  = places[0].ranking
-				p.likes    = places[0].likes
-				p.tips     = places[0].tips
-				p.checkins = places[0].checkins
-				p.save (err) ->
+				place          = new PlaceModel
+				place.type     = @data.type
+				place.loc      = [ places[0].loc[0], places[0].loc[1] ]
+				place.ranking  = places[0].ranking
+				place.likes    = places[0].likes
+				place.tips     = places[0].tips
+				place.checkins = places[0].checkins
+				place.save (err) ->
 					if err?
 						Logger.error err
+						return Response.server_error res, 'internal server error'
 
 					if merged
-						ActivityModel.update { 'actor.type' : 'place', 'actor.object': { $in : places_removed } }, { 'actor.object' : p }, (err, numberAffected, raw) ->
-							if err?
-								Logger.error err
-
-						ActivityModel.update { 'object.type' : 'place', 'object.object': { $in : places_removed } }, { 'object.object' : p }, (err, numberAffected, raw) ->
-							if err?
-								Logger.error err
-
-						ActivityModel.update { 'target.type' : 'place', 'target.object': { $in : places_removed } }, { 'target.object' : p }, (err, numberAffected, raw) ->
-							if err?
-								Logger.error err
+						ActivityModel.update({ 'actor.type'  : 'place',  'actor.object' : { $in : places_removed } }, {  'actor.object' : place }).exec()
+						ActivityModel.update({ 'object.type' : 'place', 'object.object' : { $in : places_removed } }, { 'object.object' : place }).exec()
+						ActivityModel.update({ 'target.type' : 'place', 'target.object' : { $in : places_removed } }, { 'target.object' : place }).exec()
 					else
-						activity               = new ActivityModel
-						activity.actor.type    = 'user'
-						activity.actor.object  = res.locals.user._id
-						activity.verb          = 'place'
-						activity.object.type   = 'place'
-						activity.object.object = p
-						activity.target.type   = 'place'
-						activity.target.object = p
-						activity.save (err) ->
-							if err?
-								Logger.error err
+						activity        = new ActivityModel
+						activity.verb   = "place.#{place.type}"
+						activity.actor  = { type : 'user' , object : res.locals.user }
+						activity.object = { type : 'place', object : place }
+						activity.target = { type : 'place', object : place }
+						activity.save()
 
-					return Response.created res, p
+					return Response.created res, compactObject('place', place).object
 
 	merge: (p1, p2) ->
 		PlaceModel    = db.model 'Place'

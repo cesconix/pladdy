@@ -3,14 +3,11 @@
 #----------------
 
 [
-	  'place_create'
-	, 'place_read'
-	, 'like_create'
-	, 'like_delete'
+	  'tips_read'
 	, 'tip_create'
-	, 'tip_delete'
-	, 'tip_update'
 	, 'tip_read'
+	, 'tip_update'
+	, 'tip_delete'
 
 ].map (api) ->
 	module.exports[api] = (req, res) ->
